@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<h1>Project Questionnaire</h1>
+<br>
+<form action="/anketa" method="post">
+    Enter name (latin letters): <input type="text" name="firstname" required pattern="^[a-zA-Z]+$"><br><br>
+    Your age (18 if wrong): <input type="text" name="age" required pattern="^[ 0-9]+$"><br><br>
+
+    <p>Do you like to learn java?</p>
+    <p><input type="radio" name = "answer" value = "yes" checked>Yes!<br>
+        <input type="radio" name = "answer" value = "no">No!</p>
+
+    <p>What is your favotite OS?</p>
+    <p><input type="radio" name = "os" value = "windows" checked>Windows<br>
+        <input type="radio" name = "os" value = "linux">Linux<br>
+        <input type="radio" name = "os" value = "other">other
+        </p>
+
+
+    <button>Sent</button>
+</form>
+</body>
+</html>
