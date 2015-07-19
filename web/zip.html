@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form action="/zip" method="post" enctype="multipart/form-data">
+    <p>Choose file:<input type="file" name="file"></p>
+    <p>Enter Zip name: (latin letters & numbers) <input type="text" name="zipname" required pattern="^[a-zA-Z0-9]+$"></p>
+    <button>Sent</button>
+</form>
+</body>
+</html>
