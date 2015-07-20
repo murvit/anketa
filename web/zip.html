@@ -5,10 +5,11 @@
     <title></title>
 </head>
 <body>
-<form action="/zip" method="post" enctype="multipart/form-data">
-    <p>Choose file:<input type="file" name="file"></p>
-    <p>Enter Zip name: (latin letters & numbers) <input type="text" name="zipname" required pattern="^[a-zA-Z0-9]+$"></p>
-    <button>Sent</button>
+
+<form action="/zipper" method="post" enctype="multipart/form-data">
+    <p>Choose file (2 Mb max, pls):<input type="file" name="file"></p>
+    <button>Send</button>
+    <p><a href="index.html">Go Home</a></p>
 </form>
 </body>
 </html>
