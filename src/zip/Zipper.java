@@ -50,6 +50,11 @@ public class Zipper extends HttpServlet {
                 bis.close();
             }
 
+//          Search for / in filename
+            int lastSlash = filename.lastIndexOf("\\");
+            if (lastSlash>0){
+                filename = filename.substring(lastSlash);
+            }
 
         } catch (FileUploadException e) {
             e.printStackTrace();
