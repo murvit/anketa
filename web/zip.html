@@ -7,8 +7,11 @@
 <body>
 
 <form action="/zipper" method="post" enctype="multipart/form-data">
-    <p>Choose file (10 Mb max, pls):<input type="file" name="file"></p>
+    <p>Choose files (10 Mb max, pls):<input type="file" min="1" max="999" name="file[]" multiple="multiple"></p>
+
     <button>Send</button>
+    <br>
+
     <p><a href="index.html">Go Home</a></p>
 </form>
 </body>
