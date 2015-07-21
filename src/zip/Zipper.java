@@ -23,8 +23,6 @@ import java.util.zip.ZipOutputStream;
 public class Zipper extends HttpServlet {
 
     String filename;
-    int start;
-    int lengthSeparator;
     byte[] cleanFile;
 
     @Override
