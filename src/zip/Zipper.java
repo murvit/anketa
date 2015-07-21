@@ -28,13 +28,13 @@ public class Zipper extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
+//      uploading file
         ServletFileUpload upload = new ServletFileUpload();
         try {
             FileItemIterator iterator = upload.getItemIterator(req);
             while (iterator.hasNext()) {
                 FileItemStream item = iterator.next();
-                InputStream bis = item.openStream();
+                InputStream inputStream = item.openStream();
                 if (item.isFormField())
                     item.getFieldName();
                 else
@@ -42,15 +42,15 @@ public class Zipper extends HttpServlet {
                 byte[] allData = new byte[1024 * 1024 * 5];
                 int i = 0;
                 int counter = 0;
-                while ((i = bis.read(allData, counter, 1024)) > 0) {
+                while ((i = inputStream.read(allData, counter, 1024)) > 0) {
                     counter += i;
                 }
                 cleanFile = Arrays.copyOf(allData, counter);
                 allData = null;
-                bis.close();
+                inputStream.close();
             }
 
-//          Search for / in filename
+//      search for / in filename
             int lastSlash = filename.lastIndexOf("\\");
             if (lastSlash>0){
                 filename = filename.substring(lastSlash);
@@ -60,19 +60,23 @@ public class Zipper extends HttpServlet {
             e.printStackTrace();
         }
 
+
+//      return zip file
+
         resp.setContentType("application/zip");
         resp.setHeader("Content-Disposition", "inline; filename=" + filename + ".zip;");
         byte[] output = new byte[1024];
         int len;
-        ServletOutputStream sos = resp.getOutputStream();
-        ZipOutputStream zout = new ZipOutputStream((sos));
-        zout.putNextEntry(new ZipEntry(filename));
-        ByteArrayInputStream bais = new ByteArrayInputStream(cleanFile);
-        while ((len = bais.read(output)) != -1) {
-            zout.write(output, 0, len);
+        ServletOutputStream servletOutputStream = resp.getOutputStream();
+        ZipOutputStream zipOutputStream = new ZipOutputStream((servletOutputStream));
+        zipOutputStream.putNextEntry(new ZipEntry(filename));
+        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(cleanFile);
+        while ((len = byteArrayInputStream.read(output)) != -1) {
+            zipOutputStream.write(output, 0, len);
         }
-        bais.close();
-        zout.close();
-        sos.flush();
+        byteArrayInputStream.close();
+        zipOutputStream.close();
+        servletOutputStream.flush();
+        servletOutputStream.close();
     }
 }
