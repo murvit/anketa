@@ -1,8 +1,12 @@
 package zip;
 
 
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import javax.servlet.ServletException;
-import javax.servlet.ServletInputStream;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,39 +25,37 @@ public class Zipper extends HttpServlet {
     String filename;
     int start;
     int lengthSeparator;
-
-    public void parseFile(String data) {
-
-        start = data.indexOf("\n\r") + 3;
-        lengthSeparator = data.indexOf("Content-Disposition") + 4;
-        int startFilename = data.indexOf("filename=") + 10;
-        int endFilename = data.indexOf("\"", startFilename);
-        filename = data.substring(startFilename, endFilename);
-    }
+    byte[] cleanFile;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ServletInputStream sis = req.getInputStream();
-        BufferedInputStream bis = new BufferedInputStream(sis);
 
-        byte[] allData = new byte[1024 * 1024 * 5];
-        byte[] inputData = null;
-        int i = 0;
-        int counter = 0;
-        while ((i = bis.read(allData, counter, 1024)) > 0) {
-            counter += i;
+        ServletFileUpload upload = new ServletFileUpload();
+        try {
+            FileItemIterator iterator = upload.getItemIterator(req);
+            while (iterator.hasNext()) {
+                FileItemStream item = iterator.next();
+                InputStream bis = item.openStream();
+                if (item.isFormField())
+                    item.getFieldName();
+                else
+                    filename = item.getName();
+                byte[] allData = new byte[1024 * 1024 * 5];
+                int i = 0;
+                int counter = 0;
+                while ((i = bis.read(allData, counter, 1024)) > 0) {
+                    counter += i;
+                }
+                cleanFile = Arrays.copyOf(allData, counter);
+                allData = null;
+                bis.close();
+            }
+
+
+        } catch (FileUploadException e) {
+            e.printStackTrace();
         }
-        inputData = Arrays.copyOf(allData, counter);
-        allData = null;
-        String all = new String(inputData);
-        parseFile(all);
-
-        byte [] cleanFile = Arrays.copyOfRange(inputData, start, inputData.length-lengthSeparator);
-
-        bis.close();
-        sis.close();
-
 
         resp.setContentType("application/zip");
         resp.setHeader("Content-Disposition", "inline; filename=" + filename + ".zip;");
