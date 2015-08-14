@@ -3,4 +3,10 @@
   <application>anketa-java</application>
   <version>1</version>
   <threadsafe>true</threadsafe>
+<!--
+    <static-files>
+        <include path="/static/favicon.ico" />
+    </static-files>
+-->
+
 </appengine-web-app>
