@@ -1,6 +1,7 @@
 package anketa;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,19 +44,31 @@ public class Anketa extends HttpServlet {
                 answer,
                 os);
 
-        String other = String.format("<p><h1>Statistic</h1></p> <p>Total votes: %d</p> <p>Like to learn java %d people(s)</p><p>Average age: %d</p>"+
-                "<p>Choose Windows: %d people</p><p>Choose Linux: %d peolple</p><p>Choose other: %d people<p><br>",
-                counter,
-                yesAnswers,
-                averageAge,
-                windows,
-                linux,
-                counter-windows-linux);
+  //      String other = String.format("<p><h1>Statistic</h1></p> <p>Total votes: %d</p> <p>Like to learn java %d people(s)</p><p>Average age: %d</p>"+
+//                "<p>Choose Windows: %d people</p><p>Choose Linux: %d peolple</p><p>Choose other: %d people<p><br>",
+//                counter,
+//                yesAnswers,
+//                averageAge,
+//                windows,
+//                linux,
+//                counter-windows-linux);
+//
+//        String getback = "<p><a href=\"anketa.html\">Get back to Questionnaire project</a></p>";
+//        String getHome = "<p><a href=\"index.html\">Go Home</a></p>";
+//        String result = String.format(html, you + other + getback + getHome);
+//        PrintWriter pw = resp.getWriter();
+ //       pw.print(result);
 
-        String getback = "<p><a href=\"anketa.html\">Get back to Questionnaire project</a></p>";
-        String getHome = "<p><a href=\"index.html\">Go Home</a></p>";
-        String result = String.format(html, you + other + getback + getHome);
-        PrintWriter pw = resp.getWriter();
-        pw.print(result);
+        req.setAttribute("answer", answer);
+        req.setAttribute("os", os);
+        req.setAttribute("counter", counter);
+        req.setAttribute("yesanswers", yesAnswers);
+        req.setAttribute("averageage", averageAge);
+        req.setAttribute("windows", windows);
+        req.setAttribute("linux", linux);
+        int other = counter-windows-linux;
+        req.setAttribute("other", other);
+        req.getRequestDispatcher("aresult.jsp").forward(req, resp);
+
     }
 }
