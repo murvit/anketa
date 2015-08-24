@@ -15,22 +15,27 @@
 
         <form action="/anketa" method="post">
 
-            <div class="form-group"><input type="text" name="firstname" required pattern="^[a-zA-Z]+$" placeholder = "Enter name (latin letters)"></div>
-            <div class="form-group"><input type="text" name="age" required pattern="^[ 0-9]+$" placeholder="Your age (18 if wrong)"></div>
+            <div class="form-group"><input type="text" name="firstname" required pattern="^[a-zA-Z]+$"
+                                           placeholder="Enter name (latin letters)"></div>
+            <div class="form-group"><input type="text" name="age" required pattern="^[ 0-9]+$"
+                                           placeholder="Your age (18 if wrong)"></div>
 
             Do you like to learn java?</p>
-            <p><input type="radio" name = "answer" value = "yes" checked>Yes!<br>
-                <input type="radio" name = "answer" value = "no">No!</p>
+            <p><input type="radio" name="answer" value="yes" checked>Yes!<br>
+                <input type="radio" name="answer" value="no">No!</p>
 
             <p>What is your favotite OS?</p>
-            <p><input type="radio" name = "os" value = "windows" checked>Windows<br>
-                <input type="radio" name = "os" value = "linux">Linux<br>
-                <input type="radio" name = "os" value = "other">other
+
+            <p><input type="radio" name="os" value="windows" checked>Windows<br>
+                <input type="radio" name="os" value="linux">Linux<br>
+                <input type="radio" name="os" value="other">other
             </p>
 
             <button type="submit" class="btn btn-default navbar-btn">Send</button>
-        </form>    </div>
+        </form>
+    </div>
 </div>
+<p class="navbar-text"><a href="index.html" class="navbar-link">Homepage</a></p>
 
 
 </body>
