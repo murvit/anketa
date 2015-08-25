@@ -29,7 +29,7 @@
             </tr>
             <tr>
                 <td>Like to learn java</td>
-                <td><%=request.getParameter("answer")%>
+                <td><%=request.getParameter("islike")%>
                 </td>
 
             </tr>
