@@ -37,28 +37,6 @@ public class Anketa extends HttpServlet {
             linux++;
         int averageAge = sumAge / counter;
 
-        String html = "<html><head><title>Test</title></head><body> %s </body></html>";
-
-        String you = String.format("<p><h1>Hello %s!</h1></p> <p>Your results:</p><p>Like to learn java: %s</p><p>Favorite OS: %s</p><br>",
-                firstName,
-                answer,
-                os);
-
-  //      String other = String.format("<p><h1>Statistic</h1></p> <p>Total votes: %d</p> <p>Like to learn java %d people(s)</p><p>Average age: %d</p>"+
-//                "<p>Choose Windows: %d people</p><p>Choose Linux: %d peolple</p><p>Choose other: %d people<p><br>",
-//                counter,
-//                yesAnswers,
-//                averageAge,
-//                windows,
-//                linux,
-//                counter-windows-linux);
-//
-//        String getback = "<p><a href=\"anketa.html\">Get back to Questionnaire project</a></p>";
-//        String getHome = "<p><a href=\"index.html\">Go Home</a></p>";
-//        String result = String.format(html, you + other + getback + getHome);
-//        PrintWriter pw = resp.getWriter();
- //       pw.print(result);
-
         req.setAttribute("answer", answer);
         req.setAttribute("os", os);
         req.setAttribute("counter", counter);
